@@ -15,6 +15,7 @@
     <table class="table">
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Creato il</th>
             <th scope="col"></th>
@@ -23,12 +24,13 @@
         <tbody>
             @forelse ($posts as $post)
             <tr>
+                <td>{{$post->id}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->getFormattedDate('created_at')}}</td>
                 <td class="d-flex">
                   <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary">Vai</a>
                   <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning ml-2">Modifica</a>
-                  <form action="{{route('admin.posts.destroy', $post->id)}}" method="post">
+                  <form action="{{route('admin.posts.destroy', $post->id)}}" method="post" class="delete-button">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger ml-2">Elimina</button>                  
@@ -46,5 +48,16 @@
         {{$posts->links()}}
       </footer>
 </div>
-    
+    @section('scripts')
+    <script>
+      const deleteButtons = document.querySelectorAll('.delete-button');
+      deleteButtons.forEach(form => {
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          const conf = confirm('Vuoi eliminare questo post?');
+          if (conf) this.submit();       
+        });
+      });
+    </script>
+    @endsection
 @endsection
