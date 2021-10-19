@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+  @if(session('alert-message'))
+    <div class="alert alert-{{session('alert-type')}}">
+      {{session('alert-message')}}
+    </div>
+  @endif
   <header class="my-5 d-flex justify-content-between align-items-center">
     <h1>I miei post</h1>
     <a href="{{route('admin.posts.create')}}" class="btn btn-success">Nuovo post</a>
