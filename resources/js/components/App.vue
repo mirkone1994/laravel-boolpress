@@ -1,21 +1,23 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Benvenuti sul mio sito</div>
-
-                    <div class="card-body">
-                        Under Development
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Header :title="title"></Header>
+        <main><PostList/></main>
     </div>
 </template>
 
 <script>
+import Header from "./Header.vue";
+import PostList from "./Posts/PostList.vue"
     export default {
         name: "App",
+        data (){
+            return {
+                title: "Il mio Blog"
+            }
+        },
+        components: {
+            Header,
+            PostList,
+        }
     };
 </script>
