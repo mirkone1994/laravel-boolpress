@@ -24,8 +24,7 @@
       <select class="form-control" id="category_id" name="category_id">
         <option>Nessuna categoria</option>
         @foreach ($categories as $category)
-        <option value="{{$category->id}}">{{$category->name}}</option>
-            
+        <option @if(old('category_id', $post->category_id) == $category->id) selected @endif value="{{$category->id}}">{{$category->name}}</option> 
         @endforeach
       </select>
     </div>

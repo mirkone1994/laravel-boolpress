@@ -16,7 +16,8 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Title</th>
+            <th scope="col">Titolo</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Creato il</th>
             <th scope="col"></th>
           </tr>
@@ -26,6 +27,11 @@
             <tr>
                 <td>{{$post->id}}</td>
                 <td>{{$post->title}}</td>
+                <td>@if ($post->category)
+                    {{$post->category->name}}
+                @else
+                    -
+                @endif</td>
                 <td>{{$post->getFormattedDate('created_at')}}</td>
                 <td class="d-flex">
                   <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary">Vai</a>
