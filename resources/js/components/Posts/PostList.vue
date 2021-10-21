@@ -2,7 +2,16 @@
 <section id="post-list">
     <h2>I miei Post</h2>
     <Loader v-if="isLoading"/>
-    <PostCard v-else v-for="post in posts" :key="post.id" :post="post"/>
+    <div v-else>
+    <PostCard v-for="post in posts" :key="post.id" :post="post"/>
+    <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item" v-if="pagination.currentPage > 1" @click="getPosts(pagination.currentPage-1)"><a class="page-link" >Prevoius</a></li>
+    <li class="page-item" v-if="pagination.lastPage > pagination.currentPage"  @click="getPosts(pagination.currentPage+1)"><a class="page-link" >Next</a></li>
+  </ul>
+</nav>
+
+    </div>
 </section>
   
 </template>
@@ -21,13 +30,16 @@ export default {
             baseUri: "http://localhost:8000",
             posts: [],
             isLoading: false,
+            pagination: {},
         };
     },
     methods: {
-        getPosts(){
+        getPosts(page){
             this.isLoading = true;
-            axios.get(`${this.baseUri}/api/posts`).then((res) => {
-                this.posts = res.data;
+            axios.get(`${this.baseUri}/api/posts?page=${page}`).then((res) => {
+                const {data, current_page, last_page} = res.data;
+                this.posts = data;
+                this.pagination = {currentPage: current_page, lastPage: last_page}
             }).catch((err) => {
                 console.error(err);
             }).then(()=>{
@@ -41,6 +53,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.page-item{
+    cursor: pointer;
+}
 
 </style>
