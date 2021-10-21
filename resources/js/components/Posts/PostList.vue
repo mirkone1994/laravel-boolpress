@@ -7,6 +7,7 @@
     <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item" v-if="pagination.currentPage > 1" @click="getPosts(pagination.currentPage-1)"><a class="page-link" >Prevoius</a></li>
+    <li v-for="i in pagination.lastPage" :key="i" class="page-item" :class="{active:pagination.currentPage === i}" @click="getPosts(i)"><a class="page-link">{{i}}</a></li>
     <li class="page-item" v-if="pagination.lastPage > pagination.currentPage"  @click="getPosts(pagination.currentPage+1)"><a class="page-link" >Next</a></li>
   </ul>
 </nav>

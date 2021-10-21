@@ -2045,6 +2045,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38603,49 +38604,75 @@ var render = function() {
                 "nav",
                 { attrs: { "aria-label": "Page navigation example" } },
                 [
-                  _c("ul", { staticClass: "pagination" }, [
-                    _vm.pagination.currentPage > 1
-                      ? _c(
+                  _c(
+                    "ul",
+                    { staticClass: "pagination" },
+                    [
+                      _vm.pagination.currentPage > 1
+                        ? _c(
+                            "li",
+                            {
+                              staticClass: "page-item",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getPosts(
+                                    _vm.pagination.currentPage - 1
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("a", { staticClass: "page-link" }, [
+                                _vm._v("Prevoius")
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._l(_vm.pagination.lastPage, function(i) {
+                        return _c(
                           "li",
                           {
+                            key: i,
                             staticClass: "page-item",
+                            class: { active: _vm.pagination.currentPage === i },
                             on: {
                               click: function($event) {
-                                return _vm.getPosts(
-                                  _vm.pagination.currentPage - 1
-                                )
+                                return _vm.getPosts(i)
                               }
                             }
                           },
                           [
                             _c("a", { staticClass: "page-link" }, [
-                              _vm._v("Prevoius")
+                              _vm._v(_vm._s(i))
                             ])
                           ]
                         )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.pagination.lastPage > _vm.pagination.currentPage
-                      ? _c(
-                          "li",
-                          {
-                            staticClass: "page-item",
-                            on: {
-                              click: function($event) {
-                                return _vm.getPosts(
-                                  _vm.pagination.currentPage + 1
-                                )
+                      }),
+                      _vm._v(" "),
+                      _vm.pagination.lastPage > _vm.pagination.currentPage
+                        ? _c(
+                            "li",
+                            {
+                              staticClass: "page-item",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getPosts(
+                                    _vm.pagination.currentPage + 1
+                                  )
+                                }
                               }
-                            }
-                          },
-                          [
-                            _c("a", { staticClass: "page-link" }, [
-                              _vm._v("Next")
-                            ])
-                          ]
-                        )
-                      : _vm._e()
-                  ])
+                            },
+                            [
+                              _c("a", { staticClass: "page-link" }, [
+                                _vm._v("Next")
+                              ])
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    2
+                  )
                 ]
               )
             ],
