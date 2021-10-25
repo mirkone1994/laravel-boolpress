@@ -2000,6 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"],
@@ -38551,6 +38552,12 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
+      _c("address", [
+        _vm._v(
+          "Scritto da: " + _vm._s(_vm.post.user ? _vm.post.user.name : " - ")
+        )
+      ]),
+      _vm._v(" "),
       _c("p", [_vm._v(_vm._s(_vm.post.content))]),
       _vm._v(" "),
       _c("footer", [

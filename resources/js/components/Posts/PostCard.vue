@@ -4,6 +4,7 @@
     {{post.title}}
   </div>
   <div class="card-body">
+      <address>Scritto da: {{post.user ? post.user.name : ' - '}}</address>
       <p>{{post.content}}</p>
       <footer>
           <time>Pubbliato il: {{getFormattedDate(post.created_at)}}</time>
