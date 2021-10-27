@@ -51,6 +51,7 @@ class PostController extends Controller
             'content'=>'required|string',
             'image'=>'string',
             'category_id'=>'nullable|exists:categories,id',
+            'tags'=>'nullable|exists:tags,id'
         ],
         [
             'required' => 'Il campo :attribute è obbligatorio',
@@ -63,6 +64,7 @@ class PostController extends Controller
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
         $post->save();
+        if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
         return redirect()->route('admin.posts.show', compact('post'));
     }
 
